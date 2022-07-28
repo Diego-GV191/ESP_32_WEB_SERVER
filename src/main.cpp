@@ -27,7 +27,9 @@ void setup()
     delay(200);
     Serial.print(".");
   }
+
   Serial.print("\n\n\t");
+  Serial.print("IP: ");
   Serial.println(WiFi.localIP());
 
   // Sirva el archivo "/www/page.htm" cuando la URL de la solicitud sea "/page.htm"
