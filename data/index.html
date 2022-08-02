@@ -14,11 +14,24 @@
 
 <body class="light-body">
     <div class="navBar light-navBar" id="nav">
-        <button class="btnNav light-button-nav" id="btn-theme"><span>cambiar tema</span></button>
+        <div class="container-switch">
+            <div class="toggle light-active-SW">
+                <div class="toggle-button" id="ButtonSW"></div>
+            </div>
+        </div>
+        <!-- <button class="btnNav light-button-nav" id="btn-theme"><span>cambiar tema</span></button> -->
     </div>
     <div class="container">
         <h1 class="titulo light-title" id="titulo"><span>DOIT ESP32 DEVKIT V1</span></h1>
         <div class="botonera">
+            <button class="btn primary light-button btn-led-built" id="2">
+                <span class="text">LED pin led_builtin</span>
+                <div class="indicator status-LOW salida-2"></div>
+            </button>
+            <button class="btn primary light-button btn-led-3" id="4">
+                <span class="text">LED pin 3</span>
+                <div class="indicator status-LOW salida-3"></div>
+            </button>
             <div class="pregress-container">
                 <div class="progress-circular light-progress-circular">
                     <span class="value light-CPB-Number grados">0°C</span>
@@ -27,11 +40,10 @@
             </div>
             <div class="pregress-container">
                 <div class="progress-circular light-progress-circular progress-circular-sensor-1">
-                    <span class="value light-CPB-Number grados value-sensor-1">0°C</span>
+                    <span class="value light-CPB-Number grados value-sensor-1">0</span>
                     <span class="textoInfoCPB light-texto-Info-CPB">Sensor</span>
                 </div>
             </div>
-            <button class="btn primary light-button" id="btn-led-built"><span>LED pin led_builtin</span></button>
         </div>
     </div>
     <footer id="footer"><span>Made with &#x2764 DGV &#x1F60A</span></footer>

@@ -28,13 +28,14 @@ body {
     flex-wrap: nowrap;
     width: 100%;
     min-width: 350px;
-    height: 10%;
-    max-height: 50px;
-    min-height: 30px;
+    height: 12%;
+    max-height: 65px;
+    min-height: 45px;
     margin: 0;
     box-shadow: 0px 4px 15px rgb(0, 0, 0);
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
+    padding: 5px;
 }
 
 .light-navBar {
@@ -43,6 +44,62 @@ body {
 
 .dark-navBar {
     background-color: rgba(70, 70, 70, 0.2);
+}
+
+.container-switch {
+    position: absolute;
+    top: 40%;
+    right: 100px;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-switch .toggle {
+    transition: .3s;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 90px;
+    height: 50px;
+    border-radius: 30px;
+    box-shadow: inset 0 0 3px rgb(46, 46, 46);
+}
+
+.container-switch .toggle .toggle-button {
+    transition: .3s;
+    position: absolute;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    background: rgb(240, 240, 240);
+    box-shadow: 0 0 3px rgb(46, 46, 46);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.container-switch .text {
+    position: absolute;
+    font-size: 25px;
+    left: -50px;
+}
+
+.light-active-SW {
+    background: rgba(109, 109, 109, 0.568);
+}
+
+.dark-active-SW {
+    background: rgba(168, 168, 168, 0.568);
+}
+
+.light-active-SW .toggle-button {
+    left: 5px;
+}
+
+.dark-active-SW .toggle-button {
+    left: 45px;
 }
 
 .btnNav {
@@ -64,6 +121,7 @@ body {
     text-transform: uppercase;
     transition: .3s ease all;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .light-button-nav {
@@ -84,8 +142,8 @@ body {
     z-index: 1;
     width: 90%;
     min-width: 200px;
-    margin: 0px auto 10px auto;
-    padding: 70px 0 10px 0px;
+    margin: 0px auto 15px auto;
+    padding: 100px 0 10px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,12 +178,12 @@ body {
 }
 
 .btn {
+    display: flex;
     margin: 20px;
     align-items: center;
     justify-content: center;
-    max-width: 30%;
-    width: 25%;
-    min-width: fit-content;
+    width: fit-content;
+    max-width: 90%;
     height: fit-content;
     min-height: 80px;
     padding: 10px;
@@ -142,6 +200,7 @@ body {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     color: #fff;
+    cursor: pointer;
 }
 
 .light-button {
@@ -150,14 +209,14 @@ body {
 }
 
 .dark-button {
-    background: rgba(196, 195, 195, 0.548);
+    background: rgba(255, 255, 255, 0.178);
     /* color: rgb(17, 17, 17); */
 }
 
-.btn span {
+.btn .text {
     position: relative;
     z-index: 2;
-    /* transition: .3s ease all; */
+    font-size: 24px;
 }
 
 .btn:hover {
@@ -175,7 +234,7 @@ body {
     z-index: 1;
     top: 0%;
     left: 0%;
-    transition: .5s ease-in-out all;
+    transition: .3s ease-in-out all;
     border-radius: 20px;
     transform-origin: center;
     text-align: center;
@@ -183,6 +242,22 @@ body {
 
 .btn.primary:hover::after {
     background: #f2f2f2;
+}
+
+.btn .indicator {
+    z-index: 30;
+    margin: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.btn .status-HIGH {
+    background: lime;
+}
+
+.btn .status-LOW {
+    background: red;
 }
 
 .pregress-container {
@@ -237,11 +312,11 @@ body {
     font-size: 24px;
 }
 
-.light-texto-Info-CPB{
+.light-texto-Info-CPB {
     color: rgb(85, 85, 85);
 }
 
-.dark-texto-Info-CPB{
+.dark-texto-Info-CPB {
     color: rgb(219, 219, 219);
 }
 

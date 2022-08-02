@@ -10,6 +10,7 @@ void ConfigPines(void)
 {
     pinMode(2, OUTPUT);
     pinMode(PinSensor1, INPUT);
+    pinMode(4, OUTPUT);
 }
 
 // funcion para obtener

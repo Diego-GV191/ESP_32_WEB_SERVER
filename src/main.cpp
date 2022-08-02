@@ -38,16 +38,34 @@ void setup()
   server.serveStatic("/cpde.js", SPIFFS, "/cpde.js").setDefaultFile("cpde.js");
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(SPIFFS, "/index.html"); });
-  server.on("/btn-built", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", ChangeLEd().c_str()); });
   server.on("/temp-cpu", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send_P(200, "text/plain", TempCPU().c_str()); });
   server.on("/AnalogSensor", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send_P(200, "text/plain", Asensor1().c_str()); });
-  server.on("/deviceID", HTTP_GET, [](AsyncWebServerRequest *request)
+  server.on("/device-id", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send_P(200, "text/plain", deviceID().c_str()); });
   server.on("/scan", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(200, "application/json", ScanWifi().c_str()); });
+  server.on("/update", HTTP_GET, [](AsyncWebServerRequest *request)
+            {
+    String message1;
+    String message2;
+    const char* PARAM_INPUT_1 = "output";
+    const char* PARAM_INPUT_2 = "status";
+    
+    // Obtiene el valor <ESP_IP>/update?output=<valor>&state=<valor>
+    if(request->hasParam(PARAM_INPUT_1) && request->hasParam(PARAM_INPUT_2)){
+      message1 = request->getParam(PARAM_INPUT_1)->value();
+      message2 = request->getParam(PARAM_INPUT_2)->value();
+      digitalWrite(message1.toInt(), message2.toInt());
+      Serial.print("/update?output=");
+      Serial.print(message1);
+      Serial.print("&state=");
+      Serial.println(message2);
+    }
+
+    request->send(200, "text/plain", "OK"); });
+
   server.begin();
 }
 
