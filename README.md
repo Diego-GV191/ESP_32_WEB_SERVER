@@ -16,7 +16,7 @@ DOIT ESP32 DEVKIT V1
 
 Instalar [PlatformIO IDE](http://platformio.org/platformio-ide)
 
-Configuración platformio.ini
+Configuración `platformio.ini`
 
 ```ini
 [env:esp32doit-devkit-v1]
