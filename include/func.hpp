@@ -21,7 +21,7 @@ String Asensor1()
 }
 
 // funcion para obtener
-// la temperatura del CPU
+// la temperatura del CPU en °C
 String TempCPU()
 {
     return String((temprature_sens_read() - 32) * 0.55);

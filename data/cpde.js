@@ -95,7 +95,7 @@ let progressCircularSensor = document.querySelector(".progress-circular-sensor-1
 let valueSensor = document.querySelector(".value-sensor-1");
 let startSensor = 0;
 let endValueSensor = 0;
-let valorDegres = 0.087890625;
+let valorDegres = 0.087890625; // 360/4096
 
 if (!DEBUG) {
     setInterval(() => {
