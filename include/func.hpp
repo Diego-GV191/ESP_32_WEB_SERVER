@@ -5,6 +5,9 @@ void ConsoleLog(String s, bool jump = true)
     jump ? Serial.println(s) : Serial.print(s);
 }
 
+// codigo desde WEB
+void WEBCode(void);
+
 // Configuracion de pines
 void ConfigPines(void)
 {
