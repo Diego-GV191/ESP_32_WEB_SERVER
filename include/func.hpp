@@ -66,19 +66,19 @@ String ScanWifi()
 
 // funcion para cambiar el
 // estado del LED interno
-String ChangeLEd()
+String ChangeLEd(uint8_t LED)
 {
     if (statusLED)
     {
-        digitalWrite(2, HIGH);
+        digitalWrite(LED, HIGH);
         statusLED = false;
-        return "ya se prendio";
+        return "Turn on: " + LED;
     }
     else
     {
-        digitalWrite(2, LOW);
+        digitalWrite(LED, LOW);
         statusLED = true;
-        return "ya se apago";
+        return "Turn off: " + LED;
     }
 }
 

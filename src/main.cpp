@@ -9,6 +9,9 @@
 // Servidor en el puesto 80
 AsyncWebServer server(80);
 
+// Variable para redundancia
+uint8_t reset_esp = 0;
+
 void setup()
 {
   ConfigPines();
@@ -17,6 +20,7 @@ void setup()
   if (!SPIFFS.begin())
   {
     Serial.println("An Error has occurred while mounting SPIFFS");
+    ESP.restart();
     return;
   }
 
@@ -24,8 +28,17 @@ void setup()
   Serial.print("Connecting to WiFi..");
   while (WiFi.status() != WL_CONNECTED)
   {
-    delay(200);
-    Serial.print(".");
+    if (reset_esp >= 50)
+    {
+      reset_esp = 0;
+      ESP.restart();
+    }
+    else
+    {
+      delay(200);
+      Serial.print(".");
+      reset_esp++;
+    }
   }
 
   Serial.print("\n\n\t");
