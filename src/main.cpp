@@ -6,8 +6,8 @@
 #include "header.hpp"
 #include "func.hpp"
 
-// Servidor en el puesto 80
-AsyncWebServer server(80);
+// Servidor en el puesto 5000
+AsyncWebServer server(5000);
 
 void setup()
 {
@@ -28,9 +28,11 @@ void setup()
     Serial.print(".");
   }
 
+  // http://192.168.0.126:80/
   Serial.print("\n\n\t");
-  Serial.print("IP: ");
-  Serial.println(WiFi.localIP() + ":80");
+  Serial.print("IP: http://");
+  Serial.print(WiFi.localIP());
+  Serial.println(":5000/\n");
 
   // Sirva el archivo "/www/page.htm" cuando la URL de la solicitud sea "/page.htm"
   // server.serveStatic("/page.htm", SPIFFS, "/www/page.htm");
@@ -39,7 +41,8 @@ void setup()
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
             { 
               String clientIP = request->client()->remoteIP().toString();
-              Serial.println("Dispositivo Conectado: " + clientIP);
+              Serial.print("Dispositivo Conectado: ");
+              Serial.println(clientIP);
               request->send(SPIFFS, "/index.html"); });
   server.on("/temp-cpu", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send_P(200, "text/plain", TempCPU().c_str()); });
@@ -61,7 +64,10 @@ void setup()
                 message1 = request->getParam(PARAM_INPUT_1)->value();
                 message2 = request->getParam(PARAM_INPUT_2)->value();
                 digitalWrite(message1.toInt(), message2.toInt());
-                Serial.print("/update?output=");
+                String clientIP = request->client()->remoteIP().toString();
+                Serial.print("Dispositivo: ");
+                Serial.print(clientIP);
+                Serial.print(" - instruccion: /update?output=");
                 Serial.print(message1);
                 Serial.print("&state=");
                 Serial.println(message2);
