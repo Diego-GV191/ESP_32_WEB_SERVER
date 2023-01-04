@@ -22,17 +22,8 @@ void setup()
   Serial.print("Connecting to WiFi..");
   while (WiFi.status() != WL_CONNECTED)
   {
-    if (reset_esp >= 50)
-    {
-      reset_esp = 0;
-      ESP.restart();
-    }
-    else
-    {
-      delay(200);
-      Serial.print(".");
-      reset_esp++;
-    }
+    delay(200);
+    Serial.print(".");
   }
 
   Serial.print("\n\n\t");
@@ -44,7 +35,10 @@ void setup()
   server.serveStatic("/styles.css", SPIFFS, "/styles.css").setDefaultFile("styles.css");
   server.serveStatic("/cpde.js", SPIFFS, "/cpde.js").setDefaultFile("cpde.js");
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(SPIFFS, "/index.html"); });
+            { 
+              String clientIP = request->client()->remoteIP().toString();
+              Serial.println("Dispositivo Conectado: " + clientIP);
+              request->send(SPIFFS, "/index.html"); });
   server.on("/temp-cpu", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send_P(200, "text/plain", TempCPU().c_str()); });
   server.on("/AnalogSensor", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -55,23 +49,23 @@ void setup()
             { request->send(200, "application/json", ScanWifi().c_str()); });
   server.on("/update", HTTP_GET, [](AsyncWebServerRequest *request)
             {
-    String message1;
-    String message2;
-    const char* PARAM_INPUT_1 = "output";
-    const char* PARAM_INPUT_2 = "status";
-    
-    // Obtiene el valor <ESP_IP>/update?output=<valor>&state=<valor>
-    if(request->hasParam(PARAM_INPUT_1) && request->hasParam(PARAM_INPUT_2)){
-      message1 = request->getParam(PARAM_INPUT_1)->value();
-      message2 = request->getParam(PARAM_INPUT_2)->value();
-      digitalWrite(message1.toInt(), message2.toInt());
-      Serial.print("/update?output=");
-      Serial.print(message1);
-      Serial.print("&state=");
-      Serial.println(message2);
-    }
+              String message1;
+              String message2;
+              const char* PARAM_INPUT_1 = "output";
+              const char* PARAM_INPUT_2 = "status";
+              
+              // Obtiene el valor <ESP_IP>/update?output=<valor>&state=<valor>
+              if(request->hasParam(PARAM_INPUT_1) && request->hasParam(PARAM_INPUT_2)){
+                message1 = request->getParam(PARAM_INPUT_1)->value();
+                message2 = request->getParam(PARAM_INPUT_2)->value();
+                digitalWrite(message1.toInt(), message2.toInt());
+                Serial.print("/update?output=");
+                Serial.print(message1);
+                Serial.print("&state=");
+                Serial.println(message2);
+              }
 
-    request->send(200, "text/plain", "OK"); });
+              request->send(200, "text/plain", "OK"); });
 
   server.begin();
 }
