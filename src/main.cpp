@@ -30,7 +30,7 @@ void setup()
 
   Serial.print("\n\n\t");
   Serial.print("IP: ");
-  Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP() + ":80");
 
   // Sirva el archivo "/www/page.htm" cuando la URL de la solicitud sea "/page.htm"
   // server.serveStatic("/page.htm", SPIFFS, "/www/page.htm");
