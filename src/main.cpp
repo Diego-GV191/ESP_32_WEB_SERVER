@@ -6,6 +6,9 @@
 #include "header.hpp"
 #include "func.hpp"
 
+// Servidor en el puesto 80
+AsyncWebServer server(80);
+
 void setup()
 {
   ConfigPines();
@@ -14,7 +17,6 @@ void setup()
   if (!SPIFFS.begin())
   {
     Serial.println("An Error has occurred while mounting SPIFFS");
-    ESP.restart();
     return;
   }
 
