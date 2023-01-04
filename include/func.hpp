@@ -122,3 +122,9 @@ String deviceID()
 {
     return "ESP32" + hexStr(ESP.getEfuseMac()) + String(idUnique());
 }
+
+// Manejar la solicitud desconocida
+void onRequest(AsyncWebServerRequest *request)
+{
+    request->send(404);
+}

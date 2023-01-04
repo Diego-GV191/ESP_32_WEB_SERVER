@@ -44,6 +44,11 @@ void setup()
               Serial.print("Connected device: ");
               Serial.println(clientIP);
               request->send(SPIFFS, "/index.html"); });
+  server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
+            {
+              AsyncWebServerResponse *response = request->beginResponse_P(200, "image/x-icon", favicon_ico_gz, favicon_ico_gz_len);
+              response->addHeader("Content-Encoding", "gzip");
+              request->send(response); });
   server.on("/temp-cpu", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send_P(200, "text/plain", TempCPU().c_str()); });
   server.on("/AnalogSensor", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -65,7 +70,7 @@ void setup()
                 message2 = request->getParam(PARAM_INPUT_2)->value();
 
                 digitalWrite(message1.toInt(), message2.toInt());
-                
+
                 String clientIP = request->client()->remoteIP().toString();
                 Serial.print("Dispositivo: ");
                 Serial.print(clientIP);
@@ -77,6 +82,7 @@ void setup()
 
               request->send(200, "text/plain", "OK"); });
 
+  server.onNotFound(onRequest);
   server.begin();
 }
 
