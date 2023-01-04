@@ -63,7 +63,9 @@ void setup()
               if(request->hasParam(PARAM_INPUT_1) && request->hasParam(PARAM_INPUT_2)){
                 message1 = request->getParam(PARAM_INPUT_1)->value();
                 message2 = request->getParam(PARAM_INPUT_2)->value();
+
                 digitalWrite(message1.toInt(), message2.toInt());
+                
                 String clientIP = request->client()->remoteIP().toString();
                 Serial.print("Dispositivo: ");
                 Serial.print(clientIP);

@@ -161,7 +161,7 @@ themeSystem.addEventListener('change', event => {
     changeTheme(event.matches);
 })
 
-// Aplicar estilos
+/** Aplicar estilos */
 function changeTheme(value) {
     // variables del tema de la pagina
     let themeBody = document.body;
