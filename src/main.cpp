@@ -6,12 +6,6 @@
 #include "header.hpp"
 #include "func.hpp"
 
-// Servidor en el puesto 80
-AsyncWebServer server(80);
-
-// Variable para redundancia
-uint8_t reset_esp = 0;
-
 void setup()
 {
   ConfigPines();

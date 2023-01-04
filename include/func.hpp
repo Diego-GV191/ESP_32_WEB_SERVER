@@ -66,7 +66,7 @@ String ScanWifi()
 
 // funcion para cambiar el
 // estado del LED interno
-String ChangeLEd(uint8_t LED)
+String ChangeLED(uint8_t LED)
 {
     if (statusLED)
     {

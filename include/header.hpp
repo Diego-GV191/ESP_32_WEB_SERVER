@@ -7,6 +7,12 @@ bool statusLED = true;
 // pin sensor 1
 uint8_t PinSensor1 = 34;
 
+// Servidor en el puesto 80
+AsyncWebServer server(80);
+
+// Variable para redundancia
+uint8_t reset_esp = 0;
+
 // Para ESP32 temperatura del CPU
 #ifdef __cplusplus
 extern "C"
