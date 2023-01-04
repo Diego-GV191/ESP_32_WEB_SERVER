@@ -28,7 +28,7 @@ void setup()
     Serial.print(".");
   }
 
-  // http://192.168.0.126:80/
+  // http://192.168.0.126:5000/
   Serial.print("\n\n\t");
   Serial.print("IP: http://");
   Serial.print(WiFi.localIP());
@@ -41,7 +41,7 @@ void setup()
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
             { 
               String clientIP = request->client()->remoteIP().toString();
-              Serial.print("Dispositivo Conectado: ");
+              Serial.print("Connected device: ");
               Serial.println(clientIP);
               request->send(SPIFFS, "/index.html"); });
   server.on("/temp-cpu", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -67,7 +67,7 @@ void setup()
                 String clientIP = request->client()->remoteIP().toString();
                 Serial.print("Dispositivo: ");
                 Serial.print(clientIP);
-                Serial.print(" - instruccion: /update?output=");
+                Serial.print(" - Instruction: /update?output=");
                 Serial.print(message1);
                 Serial.print("&state=");
                 Serial.println(message2);
